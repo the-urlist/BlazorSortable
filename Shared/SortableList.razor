@@ -1,0 +1,52 @@
+@using System.Collections.Generic
+@using System.Diagnostics.CodeAnalysis
+
+@inject IJSRuntime JS
+
+@typeparam T
+
+<div id="@Id">
+    @foreach (var item in Items)
+    {
+        @if (SortableItemTemplate is not null)
+        {
+            @SortableItemTemplate(item)
+        }
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment<T>? SortableItemTemplate { get; set; }
+
+    [Parameter, AllowNull]
+    public List<T> Items { get; set; }
+
+    [Parameter]
+    public EventCallback<(int oldIndex, int newIndex)> OnUpdate { get; set; }
+
+    [Parameter]
+    public string Id { get; set; } = "blazorSortable";
+
+    private DotNetObjectReference<SortableList<T>>? selfReference;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            selfReference = DotNetObjectReference.Create(this);
+            var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Shared/SortableList.razor.js");
+            await module.InvokeAsync<string>("init", Id, selfReference);
+        }
+    }
+
+    [JSInvokable]
+    public void Drop(int oldIndex, int newIndex)
+    {
+        // invoke the OnUpdate event passing in the oldIndex and the newIndex
+        OnUpdate.InvokeAsync((oldIndex, newIndex));
+    }
+
+    public void Dispose() => selfReference?.Dispose();
+}

@@ -1,0 +1,5 @@
+.sortable-ghost {
+    visibility: hidden;
+  }
+  
+.sortable-fallback { opacity: 1 !important }
