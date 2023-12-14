@@ -1,6 +1,6 @@
 # Blazor Sortable
 
-An implementation of the SortableJS library for Blazor. This example shows you how to reorder elements within a list using drag and drop.
+An implementation of the [SortableJS library](https://sortablejs.github.io/Sortable/) for Blazor. This example shows you how to reorder elements within a list using drag and drop.
 
 ## Prerequisites
 
