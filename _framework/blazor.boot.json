@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "BlazorSortable.dll": "sha256-DSBe20gBvCppi\/ndbqCLs1eHd3ajtkqtn6e7TBxmnDA=",
+      "BlazorSortable.dll": "sha256-tc1Q7xXaCK3kfyUgkK5REDFL+uiHvtSHR7NnYwVB9tA=",
       "Microsoft.AspNetCore.Components.dll": "sha256-P3MMTUySo2wNDlkla+R3gu6GsEykU14FiRHSXwlk2RY=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-l+XLEPYbpxkHxdUHcMl92bYpQ5J14AWMf7MBbQIh8vw=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-UdRrriqOtFQDdJObt5ayauryJVsDYR3c30KpM82q3z8=",
