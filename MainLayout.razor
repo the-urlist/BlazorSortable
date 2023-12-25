@@ -1,5 +1,29 @@
 ﻿@inherits LayoutComponentBase
 
 <main>
-    @Body
+    <div class="columns m-5">
+        <div class="column is-narrow">
+            <aside class="menu">
+                <p class="menu-label">
+                    Sortable Lists
+                </p>
+                <ul class="menu-list">
+                    <li>
+                        <a href="singlelist">Single List</a>
+                        <ul>
+                            <li>
+                                <a href="draghandles">Drag Handles</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="multiplelists">Multiple Lists</a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <div class="column">
+            @Body
+        </div>
+    </div>
 </main>

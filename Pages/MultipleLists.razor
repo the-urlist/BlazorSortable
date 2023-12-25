@@ -1,0 +1,109 @@
+@page "/multipleLists"
+
+<div class="container">
+    <h1 class="title is-size-1 has-text-centered">Multiple Lists</h1>
+    <div class="buttons is-centered">
+        <a class="button is-dark" href="https://github.com/your-repo" target="_blank">
+            <span class="icon">
+                <i class="fab fa-github"></i>
+            </span>
+            <span>View on GitHub</span>
+        </a>
+    </div>
+    <div class="columns">
+        <div class="column has-background-light">
+            <SortableList Group="groupName" Items="items1" Context="item" OnRemove="ListOneRemove">
+                <SortableItemTemplate>
+                    <div class="card m-4 has-background-light">
+                        <p class="is-size-4 p-2 ml-4">@item.Name</p>
+                        <p class="p-2 ml-4">@item.Description</p>
+                    </div>
+                </SortableItemTemplate>
+            </SortableList>
+        </div>
+        <div class="column has-background-light">
+            <SortableList group="groupName" OnRemove="ListTwoRemove" Items="items2" Context="item">
+                <SortableItemTemplate>
+                    <div class="card m-4 has-background-light">
+                        <p class="is-size-4 p-2 ml-4">@item.Name</p>
+                        <p class="p-2 ml-4">@item.Description</p>
+                    </div>
+                </SortableItemTemplate>
+            </SortableList>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    public class Item
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+    }
+
+    public List<Item> items1 = new List<Item>
+{
+new Item { Id = 1, Name = "Apple iPhone 13", Description = "256GB, Midnight", Price = 1099 },
+new Item { Id = 2, Name = "Samsung Galaxy S21", Description = "128GB, Phantom Gray", Price = 799 },
+new Item { Id = 3, Name = "Google Pixel 6 Pro", Description = "128GB, Stormy Black", Price = 899 },
+new Item { Id = 4, Name = "OnePlus 9 Pro", Description = "128GB, Morning Mist", Price = 969 },
+new Item { Id = 5, Name = "Sony WH-1000XM4", Description = "Wireless Noise-Cancelling Headphones", Price = 348 },
+};
+
+    public List<Item> items2 = new List<Item>
+{
+new Item { Id = 6, Name = "To Kill a Mockingbird", Description = "By Harper Lee", Price = 7 },
+new Item { Id = 7, Name = "1984", Description = "By George Orwell", Price = 9 },
+new Item { Id = 8, Name = "The Great Gatsby", Description = "By F. Scott Fitzgerald", Price = 10 },
+new Item { Id = 9, Name = "Moby Dick", Description = "By Herman Melville", Price = 11 },
+new Item { Id = 10, Name = "War and Peace", Description = "By Leo Tolstoy", Price = 12 },
+};
+
+    private void ListOneRemove((int oldIndex, int newIndex) indices)
+    {
+        // get the item at the old index in list 1
+        var item = items1[indices.oldIndex];
+
+        // add it to the new index in list 2
+        items2.Insert(indices.newIndex, item);
+
+        // remove the item from the old index in list 1
+        items1.Remove(items1[indices.oldIndex]);
+    }
+
+    private void ListTwoRemove((int oldIndex, int newIndex) indices)
+    {
+        // get the item at the old index in list 2
+        var item = items2[indices.oldIndex];
+
+        // add it to the new index in list 1
+        items1.Insert(indices.newIndex, item);
+
+        // remove the item from the old index in list 2
+        items2.Remove(items2[indices.oldIndex]);
+    }
+
+    @* private void SortList((int oldIndex, int newIndex) indices)
+{
+// deconstruct the tuple
+var (oldIndex, newIndex) = indices;
+
+var items = this.items;
+var itemToMove = items[oldIndex];
+items.RemoveAt(oldIndex);
+
+if (newIndex < items.Count)
+{
+items.Insert(newIndex, itemToMove);
+}
+else
+{
+items.Add(itemToMove);
+}
+
+StateHasChanged();
+} *@
+}

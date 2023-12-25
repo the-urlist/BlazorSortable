@@ -1,0 +1,65 @@
+@page "/singlelist"
+
+<div class="container">
+    <h1 class="title is-size-1 has-text-centered">Single List</h1>
+    <div class="buttons is-centered">
+        <a class="button is-dark" href="https://github.com/your-repo" target="_blank">
+            <span class="icon">
+                <i class="fab fa-github"></i>
+            </span>
+            <span>View on GitHub</span>
+        </a>
+    </div>
+    <div class="columns">
+        <div class="column has-background-primary-light">
+            <SortableList Id="sortable" Items="items" OnUpdate="@SortList" Context="item">
+                <SortableItemTemplate>
+                    <div class="card m-4 has-background-primary">
+                        <p class="is-size-4 p-2 ml-4 has-text-white">@item.Name</p>
+                    </div>
+                </SortableItemTemplate>
+            </SortableList>
+        </div>
+        <code class="column is-half m-5 is-size-4 p-4">
+            <p>List&lt;Item&gt; items = [</p>
+            @foreach (var item in items)
+            {
+                                    <p class="m-4">{ Id: @item.Id, Name: "@item.Name" },</p>
+            }
+            <p>]</p>
+        </code>
+    </div>
+</div>
+
+@code {
+
+    public class Item
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public List<Item> items = Enumerable.Range(1, 10).Select(i => new Item { Id = i, Name = $"Item {i}" }).ToList();
+
+
+    private void SortList((int oldIndex, int newIndex) indices)
+    {
+        // deconstruct the tuple
+        var (oldIndex, newIndex) = indices;
+
+        var items = this.items;
+        var itemToMove = items[oldIndex];
+        items.RemoveAt(oldIndex);
+
+        if (newIndex < items.Count)
+        {
+            items.Insert(newIndex, itemToMove);
+        }
+        else
+        {
+            items.Add(itemToMove);
+        }
+
+        StateHasChanged();
+    }
+}

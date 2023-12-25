@@ -27,7 +27,16 @@
     public EventCallback<(int oldIndex, int newIndex)> OnUpdate { get; set; }
 
     [Parameter]
-    public string Id { get; set; } = "blazorSortable";
+    public EventCallback<(int oldIndex, int newIndex)> OnRemove { get; set; }
+
+    [Parameter]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    public string Group { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    public string Handle { get; set; } = string.Empty;
 
     private DotNetObjectReference<SortableList<T>>? selfReference;
 
@@ -37,15 +46,22 @@
         {
             selfReference = DotNetObjectReference.Create(this);
             var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Shared/SortableList.razor.js");
-            await module.InvokeAsync<string>("init", Id, selfReference);
+            await module.InvokeAsync<string>("init", Id, Group, Handle, selfReference);
         }
     }
 
     [JSInvokable]
-    public void Drop(int oldIndex, int newIndex)
+    public void OnUpdateJS(int oldIndex, int newIndex)
     {
         // invoke the OnUpdate event passing in the oldIndex and the newIndex
         OnUpdate.InvokeAsync((oldIndex, newIndex));
+    }
+
+    [JSInvokable]
+    public void OnRemoveJS(int oldIndex, int newIndex)
+    {
+        // remove the item from the list
+        OnRemove.InvokeAsync((oldIndex, newIndex));
     }
 
     public void Dispose() => selfReference?.Dispose();
