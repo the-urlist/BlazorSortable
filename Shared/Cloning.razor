@@ -7,7 +7,7 @@
                 <div class="column">
                     <SortableList Group="cloning" Pull="clone" Items="items1" Context="item" OnRemove="ListOneRemove">
                         <SortableItemTemplate>
-                            <div class="has-border has-background-blazor has-text-white">
+                            <div class="card has-border has-background-blazor has-text-white">
                                 <p class="is-size-4 p-2 ml-4">@item.Name</p>
                             </div>
                         </SortableItemTemplate>
@@ -16,7 +16,7 @@
                 <div class="column">
                     <SortableList Group="cloning" Pull="clone" OnRemove="ListTwoRemove" Items="items2" Context="item">
                         <SortableItemTemplate>
-                            <div class="has-border has-background-blazor has-text-white">
+                            <div class=" card has-border has-background-blazor has-text-white">
                                 <p class="is-size-4 p-2 ml-4">@item.Name</p>
 
                             </div>
