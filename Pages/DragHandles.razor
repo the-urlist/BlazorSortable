@@ -2,14 +2,6 @@
 
 <div class="container">
     <h1 class="title is-size-1 has-text-centered">Drag Handles</h1>
-    <div class="buttons is-centered">
-        <a class="button is-dark" href="https://github.com/your-repo" target="_blank">
-            <span class="icon">
-                <i class="fab fa-github"></i>
-            </span>
-            <span>View on GitHub</span>
-        </a>
-    </div>
     <div class="columns">
         <div class="column has-background-primary-light">
             <SortableList Id="sortable" Handle=".drag-handle" Items="items" OnUpdate="@SortList" Context="item">
@@ -34,7 +26,7 @@
             <p>List&lt;Item&gt; items = [</p>
             @foreach (var item in items)
             {
-                                                                                                                                <p class="m-4">{ Id: @item.Id, Name: "@item.Name" },</p>
+                                                                                                                                    <p class="m-4">{ Id: @item.Id, Name: "@item.Name" },</p>
             }
             <p>]</p>
         </code>
