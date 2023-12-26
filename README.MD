@@ -2,6 +2,8 @@
 
 An implementation of the [SortableJS library](https://sortablejs.github.io/Sortable/) for Blazor. This example shows you how to reorder elements within a list using drag and drop.
 
+[View Demos](https://mango-flower-090e9130f.4.azurestaticapps.net/)
+
 ## Prerequisites
 
 - [dotnet 7](https://dotnet.microsoft.com/download/dotnet/7.0)
@@ -36,7 +38,17 @@ The SortableItemTemplate can contain any markup or components that you want.
 
 ## API
 
+### Properties
+
+Group (Optional): Used for dragging between lists. Set the group to the same value on both lists to enable.
+
+Handle (Optional): The CSS class you want the sortable to respect as the drag handle. 
+
+### Methods
+
 OnUpdate: The method to be called when the list is updated. You can name this method whatever you like, but it expects a `oldIndex` and `newIndex` parameters when the drag and drop occurs.
+
+OnRemove: The method to be called when an item is removed from a list. This method is useful for handling the drop even between multiple lists. Like `OnUpdate`, it expects `oldIndex` and `newIndex` parameters.
 
 Here is an example of how to reorder your list when the OnUpdate is fired...
 
