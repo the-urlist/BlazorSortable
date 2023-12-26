@@ -52,3 +52,8 @@ h1:focus {
 .has-cursor-grab {
     cursor: grab;
 }
+
+/* links should be white */
+a {
+    color: white;
+}
