@@ -31,8 +31,15 @@ h1:focus {
     content: "An error has occurred."
 }
 
-.has-border {
+.has-border-light {
     border: 1px solid #fff;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.has-border-dark {
+    border: 1px solid #ddd;
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;

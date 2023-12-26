@@ -6,7 +6,7 @@
                 <div class="column is-half">
                     <SortableList Id="simpleList" Items="items" OnUpdate="@SortList" Context="item">
                         <SortableItemTemplate>
-                            <div class="card has-border has-background-blazor has-text-white has-cursor-pointer">
+                            <div class="card has-border-light has-background-blazor has-text-white has-cursor-grab">
                                 <p class="is-size-4 p-2 ml-4">@item.Name</p>
                             </div>
                         </SortableItemTemplate>

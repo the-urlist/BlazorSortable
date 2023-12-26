@@ -7,7 +7,7 @@
                 <div class="column">
                     <SortableList Id="shared1" Group="sharedLists" Items="items1" Context="item" OnRemove="ListOneRemove">
                         <SortableItemTemplate>
-                            <div class=" card has-border has-background-white">
+                            <div class=" card has-border-dark has-background-white">
                                 <p class="is-size-4 p-2 ml-4">@item.Name</p>
                             </div>
                         </SortableItemTemplate>
@@ -16,7 +16,7 @@
                 <div class="column">
                     <SortableList Id="shared2" Group="sharedLists" OnRemove="ListTwoRemove" Items="items2" Context="item">
                         <SortableItemTemplate>
-                            <div class="card has-background-white has-border">
+                            <div class="card has-background-white has-border-dark">
                                 <p class="is-size-4 p-2 ml-4">@item.Name</p>
                             </div>
                         </SortableItemTemplate>
