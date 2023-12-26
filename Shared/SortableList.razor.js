@@ -1,7 +1,10 @@
-export function init(id, group, handle, component) {
-    new Sortable(document.getElementById(id), {
-        group: group || '',
+export function init(id, group, pull, handle, component) {
+    var sortable = new Sortable(document.getElementById(id), {
         animation: 200,
+        group: {
+            name: group,
+            pull: pull || true
+        },
         forceFallback: true,
         handle: handle || undefined,
         onUpdate: (event) => {
@@ -13,6 +16,11 @@ export function init(id, group, handle, component) {
             component.invokeMethodAsync('OnUpdateJS', event.oldDraggableIndex, event.newDraggableIndex);
         },
         onRemove: (event) => {
+            if (event.pullMode === 'clone') {
+                // Remove the clone
+                event.clone.remove();
+            }
+
             event.item.remove();
             event.from.insertBefore(event.item, event.from.childNodes[event.oldIndex]);
 

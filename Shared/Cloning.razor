@@ -1,0 +1,66 @@
+<div class="container">
+    <h1 class="title is-size-1 has-text-centered">Cloning</h1>
+    <p class="mb-4">Cloning is enabled by the "Pull='Clone'" property. This allows cloning of an item by dropping it into a shared list.</p>
+    <Tabs CodeContent="Test">
+        <ExampleContent>
+            <div class="columns">
+                <div class="column">
+                    <SortableList Group="cloning" Pull="clone" Items="items1" Context="item" OnRemove="ListOneRemove">
+                        <SortableItemTemplate>
+                            <div class="has-border has-background-blazor has-text-white">
+                                <p class="is-size-4 p-2 ml-4">@item.Name</p>
+                            </div>
+                        </SortableItemTemplate>
+                    </SortableList>
+                </div>
+                <div class="column">
+                    <SortableList Group="cloning" Pull="clone" OnRemove="ListTwoRemove" Items="items2" Context="item">
+                        <SortableItemTemplate>
+                            <div class="has-border has-background-blazor has-text-white">
+                                <p class="is-size-4 p-2 ml-4">@item.Name</p>
+
+                            </div>
+                        </SortableItemTemplate>
+                    </SortableList>
+                </div>
+            </div>
+        </ExampleContent>
+    </Tabs>
+</div>
+
+@code {
+
+    private bool showCode = false;
+
+    public class Item
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+    }
+
+    public List<Item> items1 = Enumerable.Range(1, 10).Select(i => new Item { Id = i, Name = $"Item {i}" }).ToList();
+
+    public List<Item> items2 = Enumerable.Range(11, 10).Select(i => new Item { Id = i, Name = $"Item {i}" }).ToList();
+
+    private void ListOneRemove((int oldIndex, int newIndex) indices)
+    {
+        // get the item at the old index in list 1
+        var item = items1[indices.oldIndex];
+
+        // make a copy
+        var clone = item;
+
+        // add it to the new index in list 2
+        items2.Insert(indices.newIndex, clone);
+    }
+
+    private void ListTwoRemove((int oldIndex, int newIndex) indices)
+    {
+        // get the item at the old index in list 2
+        var item = items2[indices.oldIndex];
+
+        // add it to the new index in list 1
+        items1.Insert(indices.newIndex, item);
+    }
+
+}

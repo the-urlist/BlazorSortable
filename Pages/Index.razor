@@ -2,8 +2,20 @@
 
 @inject IJSRuntime JS
 
-<div style="height: 100vh; padding-top: 100px;">
-    <div class="container">
-        <h1 class="title is-size-1 has-text-centered">Blazor Sortable</h1>
+<div class="has-background-light">
+    <div class="hero">
+        <div class="hero-body has-background-blazor has-text-white has-text-centered">
+            <h1 class="title is-size-1 has-text-white">Blazor Sortable</h1>
+            <p>An integration of the SortableJS library with Blazor.</p>
+        </div>
     </div>
+    <section class="section has-background-white">
+        <SimpleList></SimpleList>
+    </section>
+    <section class="section">
+        <SharedLists></SharedLists>
+    </section>
+    <section class="section has-background-white">
+        <Cloning></Cloning>
+    </section>
 </div>

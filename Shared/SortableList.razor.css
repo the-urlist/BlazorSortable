@@ -5,7 +5,9 @@
 */
 
 ::deep .sortable-ghost {
-    visibility: hidden;
-  }
-  
-::deep .sortable-fallback { opacity: 1 !important }
+  visibility: hidden;
+}
+
+::deep .sortable-fallback {
+  opacity: 1 !important
+}

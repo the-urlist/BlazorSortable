@@ -1,0 +1,34 @@
+<div>
+    <div class="tabs">
+        <ul>
+            <li class="@((showCode) ? "" : "is-active")" @onclick="(() => showCode = false)"><a>Example</a></li>
+            <li class="@((showCode) ? "is-active" : "")"><a @onclick="(() => showCode = true)">Code</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        @if (showCode)
+        {
+            <pre>@CodeContent</pre>
+        }
+        else
+        {
+            @ExampleContent
+        }
+    </div>
+</div>
+
+@code {
+    private bool showCode = false;
+
+    // render fragment for tab content
+    [Parameter]
+    public RenderFragment? ExampleContent { get; set; }
+
+    [Parameter]
+    public string CodeContent { get; set; }
+
+    private void ShowCode()
+    {
+        showCode = true;
+    }
+}
