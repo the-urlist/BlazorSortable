@@ -4,7 +4,7 @@
         <ExampleContent>
             <div class="columns">
                 <div class="column is-half">
-                    <SortableList Id="sortable" Items="items" OnUpdate="@SortList" Context="item">
+                    <SortableList Id="simpleList" Items="items" OnUpdate="@SortList" Context="item">
                         <SortableItemTemplate>
                             <div class="card has-border has-background-blazor has-text-white has-cursor-pointer">
                                 <p class="is-size-4 p-2 ml-4">@item.Name</p>
@@ -56,12 +56,6 @@
             StateHasChanged();
         }}
     }}";
-    
-    public class Item
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = "";
-    }
 
     public List<Item> items = Enumerable.Range(1, 10).Select(i => new Item { Id = i, Name = $"Item {i}" }).ToList();
 

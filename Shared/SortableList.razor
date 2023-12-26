@@ -39,6 +39,12 @@
     public string? Pull { get; set; }
 
     [Parameter]
+    public bool Put { get; set; } = true;
+
+    [Parameter]
+    public bool Sort { get; set; } = true;
+
+    [Parameter]
     public string Handle { get; set; } = string.Empty;
 
     private DotNetObjectReference<SortableList<T>>? selfReference;
@@ -49,7 +55,7 @@
         {
             selfReference = DotNetObjectReference.Create(this);
             var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Shared/SortableList.razor.js");
-            await module.InvokeAsync<string>("init", Id, Group, Pull, Handle, selfReference);
+            await module.InvokeAsync<string>("init", Id, Group, Pull, Put, Sort, Handle, selfReference);
         }
     }
 
