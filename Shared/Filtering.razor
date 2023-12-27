@@ -1,12 +1,13 @@
 <div class="container">
     <h1 class="title is-size-1 has-text-centered">Filtering</h1>
+    <p class="mb-4">In the list below, you cannot drag the item in red. This is because it is filtered out with a filter CSS class. Pass the name of this class to the `Filter` property to filter out an item.</p>
     <Tabs CodeContent="@codeContent">
         <ExampleContent>
             <div class="columns">
                 <div class="column is-half">
-                    <SortableList Id="simpleList" Items="items" OnUpdate="@SortList" Context="item">
+                    <SortableList Id="filtering" Filter=".filtered" Items="items" OnUpdate="@SortList" Context="item">
                         <SortableItemTemplate>
-                            <div class="card has-border-light has-background-blazor has-text-white has-cursor-grab">
+                            <div class="card has-border-light has-text-white has-cursor-grab @(item.Disabled ? "filtered has-background-danger" : "has-background-blazor")">
                                 <p class="is-size-4 p-2 ml-4">@item.Name</p>
                             </div>
                         </SortableItemTemplate>
@@ -20,21 +21,15 @@
 @code {
 
     private string codeContent = $@"
-    <SortableList Id=""sortable"" Items=""items"" OnUpdate=""@SortList"" Context=""item"">
+    <SortableList Id=""filtering"" Filter="".filtered"" Items=""items"" OnUpdate=""@SortList"" Context=""item"">
         <SortableItemTemplate>
-            <div class=""has-border has-background-white has-cursor-pointer"">
+            <div class=""card has-border-light has-text-white has-cursor-grab @(item.Disabled ? ""filtered has-background-danger"" : ""has-background-blazor"")"">
                 <p class=""is-size-4 p-2 ml-4"">@item.Name</p>
             </div>
         </SortableItemTemplate>
     </SortableList>
 
     @code {{
-        public class Item
-        {{
-            public int Id {{ get; set; }}
-            public string Name {{ get; set; }}
-        }}
-
         private void SortList((int oldIndex, int newIndex) indices)
         {{
             // deconstruct the tuple
@@ -58,6 +53,14 @@
     }}";
 
     public List<Item> items = Enumerable.Range(1, 10).Select(i => new Item { Id = i, Name = $"Item {i}" }).ToList();
+
+    // on initialized, set a random item in the list to disabled
+    protected override void OnInitialized()
+    {
+        var random = new Random();
+        var randomIndex = random.Next(0, items.Count);
+        items[randomIndex].Disabled = true;
+    }
 
 
     private void SortList((int oldIndex, int newIndex) indices)

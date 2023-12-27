@@ -1,4 +1,4 @@
-export function init(id, group, pull, put, sort, handle, component) {
+export function init(id, group, pull, put, sort, handle, filter, component) {
     console.log(id, pull, put, sort);
     var sortable = new Sortable(document.getElementById(id), {
         animation: 200,
@@ -7,6 +7,7 @@ export function init(id, group, pull, put, sort, handle, component) {
             pull: pull || true,
             put: put
         },
+        filter: filter || undefined,
         sort: sort,
         forceFallback: true,
         handle: handle || undefined,

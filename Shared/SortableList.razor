@@ -47,6 +47,9 @@
     [Parameter]
     public string Handle { get; set; } = string.Empty;
 
+    [Parameter]
+    public string? Filter { get; set; }
+
     private DotNetObjectReference<SortableList<T>>? selfReference;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -55,7 +58,7 @@
         {
             selfReference = DotNetObjectReference.Create(this);
             var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Shared/SortableList.razor.js");
-            await module.InvokeAsync<string>("init", Id, Group, Pull, Put, Sort, Handle, selfReference);
+            await module.InvokeAsync<string>("init", Id, Group, Pull, Put, Sort, Handle, Filter, selfReference);
         }
     }
 
