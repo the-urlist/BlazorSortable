@@ -40,15 +40,29 @@ The SortableItemTemplate can contain any markup or components that you want.
 
 ### Properties
 
-Group (Optional): Used for dragging between lists. Set the group to the same value on both lists to enable.
+All proerties are optional and have default values.
 
-Handle (Optional): The CSS class you want the sortable to respect as the drag handle. 
+`Id`: String (Default: GUID): The id of the HTML element that will be turned into a sortable. If you don't supply this, a random id (GUID) will be generated for you.
+
+`Group`: String (Default: null) - Used for dragging between lists. Set the group to the same value on both lists to enable.
+
+`Pull`: String (Default: null) - Used when you want to clone elments into a list instead of moving them. Set `Pull` to "clone".
+
+`Put`: Boolean (Default: True) - Set to false to disable dropping from another list onto the current list.
+
+`Sort`: Boolean (Default: True) - Disable sorting within a list by setting to `false`.
+
+`Handle` (Default: ""): The CSS class you want the sortable to respect as the drag handle. 
+
+`Filter` (Default: ""): The CSS class you want to use to identify elements that cannot be sorted or moved.
 
 ### Methods
 
-OnUpdate: The method to be called when the list is updated. You can name this method whatever you like, but it expects a `oldIndex` and `newIndex` parameters when the drag and drop occurs.
+`OnUpdate` (Optional): The method to be called when the list is updated. You can name this method whatever you like, but it expects a `oldIndex` and `newIndex` parameters when the drag and drop occurs.
 
-OnRemove: The method to be called when an item is removed from a list. This method is useful for handling the drop even between multiple lists. Like `OnUpdate`, it expects `oldIndex` and `newIndex` parameters.
+`OnRemove` (Optional): The method to be called when an item is removed from a list. This method is useful for handling the drop even between multiple lists. Like `OnUpdate`, it expects `oldIndex` and `newIndex` parameters.
+
+You will need to handle all events yourself. **If you don't handle any events, no sort or move will happen** as Blazor needs to make the changes to the underlying data structures so it can re-render the list. 
 
 Here is an example of how to reorder your list when the OnUpdate is fired...
 
