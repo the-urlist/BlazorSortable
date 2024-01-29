@@ -56,6 +56,8 @@ All proerties are optional and have default values.
 
 `Filter` (Default: ""): The CSS class you want to use to identify elements that cannot be sorted or moved.
 
+`ForceFallback`: Boolean (Default: True) - Enable HTML5 drag and drop by setting to `false`.
+
 ### Methods
 
 `OnUpdate` (Optional): The method to be called when the list is updated. You can name this method whatever you like, but it expects a `oldIndex` and `newIndex` parameters when the drag and drop occurs.
