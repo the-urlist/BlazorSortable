@@ -5,7 +5,7 @@
 
 @typeparam T
 
-<div id="@Id">
+<div id="@Id" class="@Class">
     @foreach (var item in Items)
     {
         @if (SortableItemTemplate is not null)
@@ -52,6 +52,9 @@
 
     [Parameter]
     public bool ForceFallback { get; set; } = true;
+
+    [Parameter]
+    public string? Class { get; set; }
 
     private DotNetObjectReference<SortableList<T>>? selfReference;
 
